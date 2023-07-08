@@ -12,3 +12,12 @@
   border: 0;
   background-image: url(../../../images/close-icon.svg);
 }
+
+@media screen and (max-width: 640px) {
+  .popup__close-button {
+    top: -36px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+  }
+}

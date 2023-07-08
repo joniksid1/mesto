@@ -2,7 +2,7 @@
   cursor: pointer;
   padding: 0;
   margin: 48px 0 37px 0;
-  min-width: 358px;
+  width: 100%;
   min-height: 50px;
   background-color: #000;
   border: 0;
@@ -11,4 +11,13 @@
   font-size: 18px;
   font-weight: 400;
   line-height: normal;
+}
+
+@media screen and (max-width: 640px) {
+  .popup__button {
+    font-size: 14px;
+    max-width: 238px;
+    margin-top: 45px;
+    align-self: center;
+  }
 }
