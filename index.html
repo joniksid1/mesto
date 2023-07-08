@@ -76,12 +76,13 @@
     <div class="popup__container">
       <button class="popup__close-button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <fieldset class="popup__form">
-        <input type="text" class="popup__input" placeholder="Жак-Ив Кусто">
-        <input type="text" class="popup__input" placeholder="Исследователь океана">
+      <form class="popup__form">
+        <input maxlength="30" type="text" class="popup__input name-input" placeholder="Жак-Ив Кусто">
+        <input maxlength="30" type="text" class="popup__input job-input" placeholder="Исследователь океана">
         <button class="popup__button">Сохранить</button>
-      </fieldset>
+      </form>
     </div>
   </section>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

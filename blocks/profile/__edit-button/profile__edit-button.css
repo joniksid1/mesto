@@ -1,8 +1,8 @@
 .profile__edit-button {
   margin: 16px 0 0 18px;
   padding: 0;
-  min-width: 24px;
-  max-height: 24px;
+  width: 24px;
+  height: 24px;
   border: none;
   cursor: pointer;
   background-size: contain;

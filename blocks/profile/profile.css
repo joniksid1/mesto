@@ -4,7 +4,7 @@
   max-width: 100%;
   padding-top: 40px;
   display: grid;
-  grid-template-columns: 120px 336px auto;
+  grid-template-columns: 120px minmax(336px, auto) 150px;
 }
 
 @media screen and (max-width: 967px) {
