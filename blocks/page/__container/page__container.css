@@ -1,0 +1,6 @@
+.page__container {
+  box-sizing: border-box;
+  max-width: 880px;
+  margin: 0 auto;
+  padding-top: 45px;
+}
