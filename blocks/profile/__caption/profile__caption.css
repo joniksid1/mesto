@@ -5,3 +5,17 @@
   line-height: normal;
   padding-top: 16px;
 }
+
+@media screen and (max-width: 967px) {
+  .profile__caption {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .profile__caption {
+    font-size: 14px;
+    padding-top: 14px;
+    line-height: normal;
+  }
+}

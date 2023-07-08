@@ -1,7 +1,24 @@
 .profile {
+  margin: 0 auto;
   box-sizing: border-box;
   max-width: 100%;
   padding-top: 40px;
   display: grid;
   grid-template-columns: 120px 336px auto;
+}
+
+@media screen and (max-width: 967px) {
+  .profile {
+    max-width: calc(100% - 15vw);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .profile {
+    max-width: 282px;
+    padding-top: 42px;
+    grid-template-columns: 282px;
+    grid-template-rows: 146px 90px 50px;
+    justify-items: center;
+  }
 }

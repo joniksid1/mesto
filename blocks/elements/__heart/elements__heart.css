@@ -8,4 +8,9 @@
   background: transparent;
   background-image: url(../../../images/white-heart.svg);
   border: none;
+  cursor: pointer;
+}
+
+.elements__heart:hover {
+  opacity: .5;
 }
