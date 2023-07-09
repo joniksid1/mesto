@@ -4,12 +4,12 @@ let popupOpenButton = document.querySelector('.profile__edit-button');
 let popupCloseButton = popup.querySelector('.popup__close-button');
 
 function popupOpenClose() {
-  popup.classList.toggle('popup__disabled');
+  popup.classList.toggle('popup_disabled');
 };
 
 function popupCloseOnOverlay(event) {
   if (event.target === event.currentTarget) {
-    popup.classList.toggle('popup__disabled');
+    popup.classList.toggle('popup_disabled');
   }
 };
 
