@@ -1,9 +1,11 @@
 .profile__caption {
   margin: 0;
+  align-self: flex-end;
+  grid-row: 2/3;
+  max-width: 336px;
   font-size: 18px;
   font-weight: 400;
   line-height: normal;
-  padding-top: 16px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -18,7 +20,7 @@
 @media screen and (max-width: 640px) {
   .profile__caption {
     font-size: 14px;
-    padding-top: 14px;
-    line-height: normal;
+    max-width: 282px;
+    text-align: center;
   }
 }

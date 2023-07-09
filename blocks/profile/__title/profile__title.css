@@ -1,16 +1,19 @@
 .profile__title {
   margin: 0;
+  max-width: 294px;
   font-size: 42px;
   font-weight: 500;
   line-height: 48px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  align-self: flex-start;
 }
 
 @media screen and (max-width: 967px) {
   .profile__title {
     font-size: 36px;
+    justify-self: flex-start;
   }
 }
 
@@ -18,5 +21,10 @@
   .profile__title {
     font-size: 27px;
     line-height: normal;
+    max-width: 189px;
+    justify-self: center;
+    align-self: flex-end;
+    grid-column: 1/2;
+    grid-row-start: 1;
   }
 }

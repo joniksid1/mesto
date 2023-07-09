@@ -39,7 +39,7 @@ function handleFormSubmit(evt) {
     let job = document.querySelector('.profile__caption');
     name.textContent = nameValue;
     job.textContent = jobValue;
+    popupOpenClose();
   }
 
 formElement.addEventListener('submit', handleFormSubmit);
-handleFormSubmit();
