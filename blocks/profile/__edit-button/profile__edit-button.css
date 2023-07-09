@@ -14,6 +14,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(../../../images/edit-button.svg);
+  transition: opacity .3s ease-in-out;
 }
 
 @media screen and (max-width: 967px) {
@@ -30,7 +31,7 @@
     grid-column: 1/2;
     grid-row-start: 1;
     justify-self: end;
-    align-self: flex-end;
+    align-self: center;
     margin: 0 18px 6px 0;
   }
 }

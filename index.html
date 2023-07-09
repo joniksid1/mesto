@@ -13,73 +13,73 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img src="./images/kusto.png" alt="Изображение портрета Жака Кусто" class="profile__image">
+        <img src="./images/kusto.png" alt="Аватар пользователя" class="profile__image">
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"></button>
+          <button class="profile__edit-button" type="button"></button>
           <p class="profile__caption">Исследователь океана</p>
         </div>
-        <button class="profile__add-button"></button>
+        <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
-        <ul class="list">
-          <li class="list__element">
+        <ul class="elements__list">
+          <li class="elements__list-item">
             <img src="./images/karachaevsk.png" alt="Изображение с пейзажем Карачаевска" class="elements__image">
             <div class="elements__caption">
               <h2 class="elements__title">Карачаевск</h2>
-              <button class="elements__heart"></button>
+              <button class="elements__heart" type="button"></button>
             </div>
           </li>
-          <li class="list__element">
+          <li class="elements__list-item">
             <img src="./images/elbrus.png" alt="Изображение с пейзажем горы Эльбрус" class="elements__image">
             <div class="elements__caption">
               <h2 class="elements__title">Гора Эльбрус</h2>
-              <button class="elements__heart"></button>
+              <button class="elements__heart" type="button"></button>
             </div>
           </li>
-          <li class="list__element">
+          <li class="elements__list-item">
             <img src="./images/dombay.png" alt="Изображение с пейзажем Домбая" class="elements__image">
             <div class="elements__caption">
               <h2 class="elements__title">Домбай</h2>
-              <button class="elements__heart"></button>
+              <button class="elements__heart" type="button"></button>
             </div>
           </li>
-          <li class="list__element">
+          <li class="elements__list-item">
             <img src="./images/elbrus.png" alt="Изображение с пейзажем горы Эльбрус" class="elements__image">
             <div class="elements__caption">
               <h2 class="elements__title">Гора Эльбрус</h2>
-              <button class="elements__heart"></button>
+              <button class="elements__heart" type="button"></button>
             </div>
           </li>
-          <li class="list__element">
+          <li class="elements__list-item">
             <img src="./images/dombay.png" alt="Изображение с пейзажем Домбая" class="elements__image">
             <div class="elements__caption">
               <h2 class="elements__title">Домбай</h2>
-              <button class="elements__heart"></button>
+              <button class="elements__heart" type="button"></button>
             </div>
           </li>
-          <li class="list__element">
+          <li class="elements__list-item">
             <img src="./images/karachaevsk.png" alt="Изображение с пейзажем Карачаевска" class="elements__image">
             <div class="elements__caption">
               <h2 class="elements__title">Карачаево-Черкессия</h2>
-              <button class="elements__heart"></button>
+              <button class="elements__heart" type="button"></button>
             </div>
           </li>
         </ul>
       </section>
     </main>
     <footer class="footer">
-      <h2 class="footer__title">© 2023 Кузнецов Михаил</h2>
+      <p class="footer__copyright">© 2023 Кузнецов Михаил</p>
     </footer>
   </div>
-  <section class="popup popup_disabled">
+  <section class="popup">
     <div class="popup__container">
-      <button class="popup__close-button"></button>
+      <button class="popup__close-button" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
-        <input maxlength="30" type="text" class="popup__input name-input" placeholder="Жак-Ив Кусто">
-        <input maxlength="30" type="text" class="popup__input job-input" placeholder="Исследователь океана">
-        <button class="popup__button">Сохранить</button>
+      <form name="profile" class="popup__form">
+        <input name="name" maxlength="30" type="text" class="popup__input popup__input_type_name">
+        <input name="job" maxlength="30" type="text" class="popup__input popup__input_type_job">
+        <button class="popup__button" type="submit">Сохранить</button>
       </form>
     </div>
   </section>

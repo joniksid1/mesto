@@ -9,4 +9,5 @@
   background-color: #000;
   color: #FFF;
   position: relative;
+  min-width: 320px;
 }

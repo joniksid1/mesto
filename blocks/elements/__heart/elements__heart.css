@@ -9,6 +9,7 @@
   background-image: url(../../../images/white-heart.svg);
   border: none;
   cursor: pointer;
+  transition: opacity .3s ease-in-out;
 }
 
 .elements__heart:hover {

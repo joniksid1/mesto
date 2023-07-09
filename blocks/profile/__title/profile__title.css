@@ -23,7 +23,7 @@
     line-height: normal;
     max-width: 189px;
     justify-self: center;
-    align-self: flex-end;
+    align-self: flex-start;
     grid-column: 1/2;
     grid-row-start: 1;
   }

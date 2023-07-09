@@ -11,6 +11,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: normal;
+  transition: opacity .3s ease-in-out;
 }
 
 @media screen and (max-width: 640px) {
@@ -20,4 +21,8 @@
     margin-top: 45px;
     align-self: center;
   }
+}
+
+.popup__button:hover {
+  opacity: .8;
 }

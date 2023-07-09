@@ -18,10 +18,9 @@
 @media screen and (max-width: 640px) {
   .profile__info {
     margin: 0;
-    max-height: 54px;
+    align-self: flex-start;
     grid-template-columns: 282px;
     grid-template-rows: 40px 14px;
-    row-gap: 14px;
     max-width: 282px;
   }
 }
