@@ -72,14 +72,25 @@
       <p class="footer__copyright">© 2023 Кузнецов Михаил</p>
     </footer>
   </div>
-  <div class="popup">
-    <div class="popup__container">
-      <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="profile" class="popup__form">
+  <div class="popup popup_type_edit">
+    <div class="popup__container popup__container_type_edit">
+      <button class="popup__close-button popup__close-button_type_edit" type="button" aria-label="Закрыть"></button>
+      <h2 class="popup__title popup__title_type_edit">Редактировать профиль</h2>
+      <form name="profile" class="popup__form popup__form_type_edit">
         <input name="name" maxlength="30" type="text" class="popup__input popup__input_type_name">
         <input name="job" maxlength="30" type="text" class="popup__input popup__input_type_job">
-        <button class="popup__button" type="submit">Сохранить</button>
+        <button class="popup__button popup__button_type_edit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_add">
+    <div class="popup__container popup__container_type_add">
+      <button class="popup__close-button popup__close-button_type_add" type="button" aria-label="Закрыть"></button>
+      <h2 class="popup__title popup__titile_type_add">Новое место</h2>
+      <form name="profile" class="popup__form popup__form_type_add">
+        <input name="place-name" maxlength="30" type="text" class="popup__input popup__input_type_place-name">
+        <input name="image-link" type="url" class="popup__input popup__input_type_image-link">
+        <button class="popup__button pupup__button_type_add" type="submit">Создать</button>
       </form>
     </div>
   </div>
