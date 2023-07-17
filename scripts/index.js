@@ -70,6 +70,10 @@ const addPopupCloseButton = addPopup.querySelector('.popup__close-button_type_ad
 const placeName = addPopup.querySelector('.popup__input_type_place-name');
 const imageLink = addPopup.querySelector('.popup__input_type_image-link');
 
+// Переменные поп-апа с картинкой (недодел - сделать текущее изображение с event)
+
+const imagePopup = document.querySelector('.image-popup');
+
 // Функция простановки лайка на карточку
 
 likeButtons.forEach((item) => {
@@ -120,6 +124,11 @@ function addCard(evt) {
   const likeButton = card.querySelector('.elements__heart');
   likeButton.addEventListener('click', function(evt) {
     evt.target.classList.toggle('elements__heart_active');
+  });
+
+  const deleteButton = card.querySelector('.elements__delete');
+  deleteButton.addEventListener('click', function() {
+    card.remove();
   });
 
   elements.prepend(card);
