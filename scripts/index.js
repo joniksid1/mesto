@@ -45,6 +45,11 @@ for (i = 0; i < initialCards.length; i++) {
   addInitialCards(initialCards[i].name, initialCards[i].link);
 }
 
+// Переменные для лайков на карточки
+
+const likeButtons = document.querySelectorAll('.elements__heart');
+const likeButton = document.querySelector('.elements__heart');
+
 // Переменные для редактирования профиля
 
 const editPopup = document.querySelector('.popup_type_edit');
@@ -61,10 +66,6 @@ const job = document.querySelector('.profile__caption');
 const addPopup = document.querySelector('.popup_type_add')
 const addPopupOpenButton = document.querySelector('.profile__add-button');
 const addPopupCloseButton = addPopup.querySelector('.popup__close-button_type_add')
-
-// Переменные для карточек
-
-const likeButton = document.querySelector('.elements__heart');
 
 // Функция открытия и закрытия поп-апа редактирования профиля
 
@@ -97,8 +98,10 @@ function handleFormSubmit(evt) {
 
 // Функция простановки лайка на карточку
 
-likeButton.addEventListener('click', function setLike(event) {
-  event.target.classList.toggle('elements__heart_active');
+likeButtons.forEach((item) => {
+    item.addEventListener('click', function() {
+      item.classList.toggle('elements__heart_active');
+    });
 });
 
 // Обработчики событий поп-апа редактирования профиля
@@ -111,9 +114,6 @@ editFormElement.addEventListener('submit', handleFormSubmit);
 
 addPopupOpenButton.addEventListener('click', addPopupOpenClose);
 addPopupCloseButton.addEventListener('click', addPopupOpenClose);
-
-
-
 
 // Добавление карточек по клику (ещё не работает)
 
