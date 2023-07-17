@@ -111,17 +111,37 @@ function handleFormSubmit(evt) {
 
 function addCard(evt) {
   evt.preventDefault();
+
   const cardsTemplate = document.querySelector('#cards').content;
   const card = cardsTemplate.querySelector('.elements__list-item').cloneNode(true);
   card.querySelector('.elements__title').textContent = placeName.value;
   card.querySelector('.elements__image').src = imageLink.value;
+
   const likeButton = card.querySelector('.elements__heart');
   likeButton.addEventListener('click', function(evt) {
     evt.target.classList.toggle('elements__heart_active');
   });
+
   elements.prepend(card);
   addPopupOpenClose();
 }
+
+// Переменная кнопки удаления
+
+const deleteButtons = document.querySelectorAll('.elements__delete')
+
+// Функция удаления карточки
+
+deleteButtons.forEach((item) => {
+  item.addEventListener('click', function(evt) {
+    const cards = document.querySelectorAll('.elements__list-item');
+    cards.forEach((item) => {
+      item.addEventListener('click', function(event){
+        evt.currentTarget.remove();
+      });
+    });
+  });
+});
 
 // Обработчик события добавления карточки
 
