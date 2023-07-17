@@ -1,4 +1,5 @@
 .elements__list-item {
+  position: relative;
   max-width: 282px;
   list-style-type: none;
   background-color: #fff;

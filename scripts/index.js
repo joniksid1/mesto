@@ -1,4 +1,4 @@
-// Стандартные карточки при загрузке
+// Данные стандартных карточек при загрузке
 
 const initialCards = [
   {
@@ -64,8 +64,19 @@ const job = document.querySelector('.profile__caption');
 // Переменные поп-апа добавление карточек
 
 const addPopup = document.querySelector('.popup_type_add')
+const addFormElement = addPopup.querySelector('.popup__form_type_add');
 const addPopupOpenButton = document.querySelector('.profile__add-button');
 const addPopupCloseButton = addPopup.querySelector('.popup__close-button_type_add')
+const placeName = addPopup.querySelector('.popup__input_type_place-name');
+const imageLink = addPopup.querySelector('.popup__input_type_image-link');
+
+// Функция простановки лайка на карточку
+
+likeButtons.forEach((item) => {
+  item.addEventListener('click', function() {
+    item.classList.toggle('elements__heart_active');
+  });
+});
 
 // Функция открытия и закрытия поп-апа редактирования профиля
 
@@ -96,13 +107,25 @@ function handleFormSubmit(evt) {
     editPopupClose();
   }
 
-// Функция простановки лайка на карточку
+// Функция добавления карточек по клику
 
-likeButtons.forEach((item) => {
-    item.addEventListener('click', function() {
-      item.classList.toggle('elements__heart_active');
-    });
-});
+function addCard(evt) {
+  evt.preventDefault();
+  const cardsTemplate = document.querySelector('#cards').content;
+  const card = cardsTemplate.querySelector('.elements__list-item').cloneNode(true);
+  card.querySelector('.elements__title').textContent = placeName.value;
+  card.querySelector('.elements__image').src = imageLink.value;
+  const likeButton = card.querySelector('.elements__heart');
+  likeButton.addEventListener('click', function(evt) {
+    evt.target.classList.toggle('elements__heart_active');
+  });
+  elements.prepend(card);
+  addPopupOpenClose();
+}
+
+// Обработчик события добавления карточки
+
+addFormElement.addEventListener('submit', addCard);
 
 // Обработчики событий поп-апа редактирования профиля
 
@@ -115,19 +138,3 @@ editFormElement.addEventListener('submit', handleFormSubmit);
 addPopupOpenButton.addEventListener('click', addPopupOpenClose);
 addPopupCloseButton.addEventListener('click', addPopupOpenClose);
 
-// Добавление карточек по клику (ещё не работает)
-
-const addFormElement = addPopup.querySelector('.popup__form_type_add');
-
-function addCard(evt, title, link) {
-  evt.preventDefault();
-  const cardsTemplate = document.querySelector('#cards').content;
-  const card = cardsTemplate.querySelector('.elements__list-item').cloneNode(true);
-  card.querySelector('.popup__input_type_place-name').value = title;
-  card.querySelector('.popup__input_type_image-link').src = link;
-  elements.append(card);
-
-  addPopupOpenClose();
-}
-
-addFormElement.addEventListener('submit', addCard);
