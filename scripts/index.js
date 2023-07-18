@@ -52,10 +52,10 @@ const likeButton = document.querySelector('.elements__heart');
 
 // Переменные для редактирования профиля
 
-const editPopup = document.querySelector('.popup_type_edit');
+const editPopup = document.querySelector('.edit-popup');
 const editPopupOpenButton = document.querySelector('.profile__edit-button');
-const editPopupCloseButton = editPopup.querySelector('.popup__close-button_type_edit');
-const editFormElement = editPopup.querySelector('.popup__form_type_edit');
+const editPopupCloseButton = editPopup.querySelector('.edit-popup__close-button');
+const editFormElement = editPopup.querySelector('.edit-popup__form');
 const nameInput = editFormElement.querySelector('.popup__input_type_name');
 const jobInput = editFormElement.querySelector('.popup__input_type_job');
 const name = document.querySelector('.profile__title');
@@ -63,10 +63,10 @@ const job = document.querySelector('.profile__caption');
 
 // Переменные поп-апа добавление карточек
 
-const addPopup = document.querySelector('.popup_type_add')
-const addFormElement = addPopup.querySelector('.popup__form_type_add');
+const addPopup = document.querySelector('.add-popup')
+const addFormElement = addPopup.querySelector('.add-popup__form');
 const addPopupOpenButton = document.querySelector('.profile__add-button');
-const addPopupCloseButton = addPopup.querySelector('.popup__close-button_type_add')
+const addPopupCloseButton = addPopup.querySelector('.add-popup__close-button')
 const placeName = addPopup.querySelector('.popup__input_type_place-name');
 const imageLink = addPopup.querySelector('.popup__input_type_image-link');
 
@@ -110,7 +110,7 @@ function handleFormSubmit(evt) {
 // Переменные поп-апа с картинкой
 
 const imagePopup = document.querySelector('.image-popup');
-const imagePopupCloseButton = document.querySelector('.popup__close-button_type_image');
+const imagePopupCloseButton = document.querySelector('.image-popup__close-button');
 const imagePopupImage = imagePopup.querySelector('.image-popup__image');
 const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
 const images = document.querySelectorAll('.elements__image');
