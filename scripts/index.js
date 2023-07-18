@@ -22,8 +22,8 @@ const initialCards = [
     link: './images/karelia.jpg'
   },
   {
-    name: 'Карачаево-Черкессия',
-    link: './images/karachaevsk.jpg'
+    name: 'Архыз',
+    link: './images/arkhyz.jpg'
   }
 ];
 
@@ -70,10 +70,6 @@ const addPopupCloseButton = addPopup.querySelector('.popup__close-button_type_ad
 const placeName = addPopup.querySelector('.popup__input_type_place-name');
 const imageLink = addPopup.querySelector('.popup__input_type_image-link');
 
-// Переменные поп-апа с картинкой (недодел - сделать текущее изображение с event)
-
-const imagePopup = document.querySelector('.image-popup');
-
 // Функция простановки лайка на карточку
 
 likeButtons.forEach((item) => {
@@ -111,6 +107,28 @@ function handleFormSubmit(evt) {
     editPopupClose();
   }
 
+// Переменные поп-апа с картинкой
+
+const imagePopup = document.querySelector('.image-popup');
+const imagePopupCloseButton = document.querySelector('.popup__close-button_type_image');
+const imagePopupImage = imagePopup.querySelector('.image-popup__image');
+const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
+const images = document.querySelectorAll('.elements__image');
+
+const cardTitle = elements.querySelector('.elements__title');
+
+//Функция открытия поп-апа картинки
+
+images.forEach((item) => {
+  item.addEventListener('click', function() {
+    imagePopupImage.src = item.src;
+    const card = item.closest('.elements__list-item');
+    const cardTitle = card.querySelector('.elements__title');
+    imagePopupCaption.textContent = cardTitle.textContent;
+    imagePopup.classList.toggle('popup_opened');
+  });
+});
+
 // Функция добавления карточек по клику
 
 function addCard(evt) {
@@ -118,8 +136,10 @@ function addCard(evt) {
 
   const cardsTemplate = document.querySelector('#cards').content;
   const card = cardsTemplate.querySelector('.elements__list-item').cloneNode(true);
-  card.querySelector('.elements__title').textContent = placeName.value;
-  card.querySelector('.elements__image').src = imageLink.value;
+  const cardTitle = card.querySelector('.elements__title');
+  const cardImage = card.querySelector('.elements__image');
+  cardTitle.textContent = placeName.value;
+  cardImage.src = imageLink.value;
 
   const likeButton = card.querySelector('.elements__heart');
   likeButton.addEventListener('click', function(evt) {
@@ -129,6 +149,12 @@ function addCard(evt) {
   const deleteButton = card.querySelector('.elements__delete');
   deleteButton.addEventListener('click', function() {
     card.remove();
+  });
+
+  cardImage.addEventListener('click', function() {
+    imagePopupImage.src = cardImage.src;
+    imagePopupCaption.textContent = cardTitle.textContent;
+    imagePopup.classList.toggle('popup_opened');
   });
 
   elements.prepend(card);
@@ -152,6 +178,12 @@ deleteButtons.forEach((item) => {
   });
 });
 
+// Функция закрытия поп-апа картинки
+
+function imagePopupClose() {
+  imagePopup.classList.toggle('popup_opened');
+};
+
 // Обработчик события добавления карточки
 
 addFormElement.addEventListener('submit', addCard);
@@ -167,3 +199,6 @@ editFormElement.addEventListener('submit', handleFormSubmit);
 addPopupOpenButton.addEventListener('click', addPopupOpenClose);
 addPopupCloseButton.addEventListener('click', addPopupOpenClose);
 
+// Обработчики событий поп-апа картинок
+
+imagePopupCloseButton.addEventListener('click', imagePopupClose);
