@@ -104,15 +104,10 @@ function handleFormSubmit(evt) {
 
 const addNewCard = (evt) => {
   evt.preventDefault();
-  if (placeName.value && imageLink.value) {
-    const newElement = createCardByTemplate({name: placeName.value, link: imageLink.value});
-    elements.prepend(newElement);
-  } else {
-    alert('Поля не должны быть пустые!');
-  }
-  placeName.value = "";
-  imageLink.value = "";
+  const newElement = createCardByTemplate({name: placeName.value, link: imageLink.value});
+  elements.prepend(newElement);
   closeModalWindow(addPopup);
+  addFormElement.reset();
 };
 
 // Обработчик события изменения данных профиля
