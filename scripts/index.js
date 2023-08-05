@@ -83,6 +83,7 @@ const deleteCard = (evt) => {
 
 function openModalWindow(modalWindow) {
   modalWindow.classList.add('popup_opened');
+  modalWindow.addEventListener('click', closePopupOnOverlay);
 };
 
 function closeModalWindow(modalWindow) {
@@ -109,6 +110,22 @@ const addNewCard = (evt) => {
   closeModalWindow(addPopup);
   addFormElement.reset();
 };
+
+// Открытие и закрытие поп-апа на клавишу Esc/Оверлей
+
+const closePopupOnEscape = (evt) => {
+  if (evt.key === 'Escape') {
+    closeModalWindow(evt.currentTarget.querySelector('.popup_opened'));
+  }
+}
+
+const closePopupOnOverlay = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closeModalWindow(evt.currentTarget);
+  }
+}
+
+document.addEventListener('keydown', closePopupOnEscape);
 
 // Обработчик события изменения данных профиля
 

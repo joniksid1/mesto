@@ -6,16 +6,13 @@
 
 // дополнительно для поп-апа добавления карточки
 
-const addPopupButton = addFormElement.querySelector('.add-popup__button');
 const imageLinkError = addFormElement.querySelector('.popup__input-error_type_image-link');
 const placeNameError = addFormElement.querySelector('.popup__input-error_type_place-name');
 
 // дополнительно для поп-апа редактирования профиля
 
-const editPopupButton = editFormElement.querySelector('.edit-popup__button');
 const nameInputError = editFormElement.querySelector('.popup__input-error_type_name');
 const jobInputError = editFormElement.querySelector('.popup__input-error_type_job');
-
 
 const checkInputValidity = (inputElement) => {
   const errorElement = document.querySelector(`#${inputElement.id}-error`);
@@ -32,21 +29,27 @@ const validateForm = (evt) => {
   checkInputValidity(imageLink);
   checkInputValidity(nameInput);
   checkInputValidity(jobInput);
-  if (addFormElement.checkValidity()) {
-    setButtonState(true);
+  const buttonElement = evt.currentTarget.querySelector('.popup__button');
+  if (evt.currentTarget.checkValidity()) {
+    setButtonState(true, buttonElement);
   } else {
-    setButtonState(false);
+    setButtonState(false, buttonElement);
   }
 };
 
-const setButtonState = (isActive) => {
+const setButtonState = (isActive, buttonElement) => {
   if (isActive) {
-    addPopupButton.removeAttribute('disabled');
+    buttonElement.removeAttribute('disabled');
   } else {
-    addPopupButton.setAttribute('disabled', true);
+    buttonElement.setAttribute('disabled', true);
   }
 };
 
-addFormElement.addEventListener('input', validateForm);
-addFormElement.addEventListener('submit', validateForm);
+const enableValidation = () => {
+  addFormElement.addEventListener('input', validateForm);
+  addFormElement.addEventListener('submit', validateForm);
+  editFormElement.addEventListener('input', validateForm);
+  editFormElement.addEventListener('submit', validateForm);
+}
 
+enableValidation();
