@@ -45,7 +45,7 @@ const setButtonState = (isActive, buttonElement) => {
   }
 };
 
-const enableValidation = () => {
+const enableValidation = (data) => {
   addFormElement.addEventListener('input', validateForm);
   addFormElement.addEventListener('submit', validateForm);
   editFormElement.addEventListener('input', validateForm);

@@ -1,7 +1,7 @@
 .popup__button {
   cursor: pointer;
   padding: 0;
-  margin: 48px 0 37px 0;
+  margin: 11px 0 37px 0;
   width: 100%;
   min-height: 50px;
   background-color: #000;
@@ -18,7 +18,7 @@
   .popup__button {
     font-size: 14px;
     max-width: 238px;
-    margin: 45px 0 25px 0;
+    margin: 0;
     align-self: center;
   }
 }
