@@ -29,10 +29,8 @@ const setEventListeners = (validationData) => {
       input.addEventListener('input', function () {
         checkInputValidity(input, validationData, form);
         if (form.checkValidity()) {
-          console.log('success');
           setButtonState(true, buttonElement);
         } else {
-          console.log('fail');
           setButtonState(false, buttonElement);
         }
       });
