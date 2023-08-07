@@ -1,39 +1,9 @@
-// Названия переменных:
-// форма добавления - addFormElement
-// инпуты добавления - placeName и imageLink
-// форма профайла - editFormElement
-// инпуты профайла - nameInput и jobInput
-
-// дополнительно для поп-апа добавления карточки
-
-const imageLinkError = addFormElement.querySelector('.popup__input-error_type_image-link');
-const placeNameError = addFormElement.querySelector('.popup__input-error_type_place-name');
-
-// дополнительно для поп-апа редактирования профиля
-
-const nameInputError = editFormElement.querySelector('.popup__input-error_type_name');
-const jobInputError = editFormElement.querySelector('.popup__input-error_type_job');
-
-const checkInputValidity = (inputElement) => {
-  const errorElement = document.querySelector(`#${inputElement.id}-error`);
-  if (inputElement.checkValidity()) {
+const checkInputValidity = (input, validationData, form) => {
+  const errorElement = form.querySelector(`${validationData.inputErrorClass}${input.name}`);
+  if (input.checkValidity()) {
     errorElement.textContent = '';
   } else {
-    errorElement.textContent = inputElement.validationMessage;
-  }
-};
-
-const validateForm = (evt) => {
-  evt.preventDefault();
-  checkInputValidity(placeName);
-  checkInputValidity(imageLink);
-  checkInputValidity(nameInput);
-  checkInputValidity(jobInput);
-  const buttonElement = evt.currentTarget.querySelector('.popup__button');
-  if (evt.currentTarget.checkValidity()) {
-    setButtonState(true, buttonElement);
-  } else {
-    setButtonState(false, buttonElement);
+    errorElement.textContent = input.validationMessage;
   }
 };
 
@@ -45,11 +15,38 @@ const setButtonState = (isActive, buttonElement) => {
   }
 };
 
-const enableValidation = (data) => {
-  addFormElement.addEventListener('input', validateForm);
-  addFormElement.addEventListener('submit', validateForm);
-  editFormElement.addEventListener('input', validateForm);
-  editFormElement.addEventListener('submit', validateForm);
+const preventDefault = (evt) => {
+  evt.preventDefault();
 }
 
-enableValidation();
+const setEventListeners = (validationData) => {
+  const forms = Array.from(document.querySelectorAll(validationData.formSelector));
+  forms.forEach((form) => {
+    const buttonElement = form.querySelector(validationData.submitButtonSelector);
+    form.addEventListener('submit', preventDefault);
+    const inputs = Array.from(form.querySelectorAll(validationData.inputSelector));
+    inputs.forEach((input) => {
+      input.addEventListener('input', function () {
+        checkInputValidity(input, validationData, form);
+        if (form.checkValidity()) {
+          console.log('success');
+          setButtonState(true, buttonElement);
+        } else {
+          console.log('fail');
+          setButtonState(false, buttonElement);
+        }
+      });
+    });
+  });
+}
+
+const enableValidation = (validationData) => {
+  setEventListeners(validationData);
+}
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inputErrorClass: '.popup__input-error_type_',
+});
