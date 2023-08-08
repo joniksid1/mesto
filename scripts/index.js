@@ -1,6 +1,6 @@
 // Переменные карточек
 
-const elements = document.querySelector('.elements__list');
+const elementsContainer = document.querySelector('.elements__list');
 const cardsTemplate = document.querySelector('.cards');
 
 // Функция создания карточки
@@ -23,9 +23,9 @@ const createCardByTemplate = (data) => {
   });
 
   cardImage.addEventListener('click', function() {
-    imagePopupImage.src = cardImage.src;
-    imagePopupCaption.textContent = cardTitle.textContent;
-    openModalWindow(imagePopup);
+    popupImageImage.src = cardImage.src;
+    popupImageCaption.textContent = cardTitle.textContent;
+    openModalWindow(popupImage);
   });
 
   return card;
@@ -35,36 +35,36 @@ const createCardByTemplate = (data) => {
 
 const renderInitialCards = () => {
   initialCards.forEach((item) => {
-    elements.append(createCardByTemplate(item));
+    elementsContainer.append(createCardByTemplate(item));
   })
 };
 
 // Переменные для редактирования профиля
 
-const editPopup = document.querySelector('.edit-popup');
-const editPopupOpenButton = document.querySelector('.profile__edit-button');
-const editPopupCloseButton = editPopup.querySelector('.edit-popup__close-button');
-const editFormElement = editPopup.querySelector('.edit-popup__form');
-const nameInput = editFormElement.querySelector('.popup__input_type_name');
-const jobInput = editFormElement.querySelector('.popup__input_type_job');
-const name = document.querySelector('.profile__title');
-const job = document.querySelector('.profile__caption');
+const popupEdit = document.querySelector('.edit-popup');
+const popupOpenButtonEdit = document.querySelector('.profile__edit-button');
+const popupCloseButtonEdit = popupEdit.querySelector('.edit-popup__close-button');
+const formElementEdit = popupEdit.querySelector('.edit-popup__form');
+const nameInput = formElementEdit.querySelector('.popup__input_type_name');
+const jobInput = formElementEdit.querySelector('.popup__input_type_job');
+const profileTitle = document.querySelector('.profile__title');
+const profileCaption = document.querySelector('.profile__caption');
 
 // Переменные поп-апа добавление карточек
 
-const addPopup = document.querySelector('.add-popup');
-const addFormElement = addPopup.querySelector('.add-popup__form');
-const addPopupOpenButton = document.querySelector('.profile__add-button');
-const addPopupCloseButton = addPopup.querySelector('.add-popup__close-button')
-const placeName = addPopup.querySelector('.popup__input_type_place-name');
-const imageLink = addPopup.querySelector('.popup__input_type_image-link');
+const popupAdd = document.querySelector('.add-popup');
+const formElementAdd = popupAdd.querySelector('.add-popup__form');
+const apopupOpenButtonAdd = document.querySelector('.profile__add-button');
+const popupCloseButtonAdd = popupAdd.querySelector('.add-popup__close-button')
+const placeName = popupAdd.querySelector('.popup__input_type_place-name');
+const imageLink = popupAdd.querySelector('.popup__input_type_image-link');
 
 // Переменные поп-апа с картинкой
 
-const imagePopup = document.querySelector('.image-popup');
-const imagePopupCloseButton = document.querySelector('.image-popup__close-button');
-const imagePopupImage = imagePopup.querySelector('.image-popup__image');
-const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
+const popupImage = document.querySelector('.image-popup');
+const popupCloseButtonImage = document.querySelector('.image-popup__close-button');
+const popupImageImage = popupImage.querySelector('.image-popup__image');
+const popupImageCaption = popupImage.querySelector('.image-popup__caption');
 
 // Функция лайка карточки
 
@@ -84,21 +84,24 @@ const deleteCard = (evt) => {
 function openModalWindow(modalWindow) {
   modalWindow.classList.add('popup_opened');
   modalWindow.addEventListener('click', closePopupOnOverlay);
+  document.addEventListener('keydown', closePopupOnEscape);
 };
 
 function closeModalWindow(modalWindow) {
   modalWindow.classList.remove('popup_opened');
+  modalWindow.removeEventListener('click', closePopupOnOverlay);
+  document.removeEventListener('keydown', closePopupOnEscape);
 };
 
 // Функция вставки данных в профиль
 
-function handleFormSubmit(evt) {
+function submitEditProfileForm(evt) {
   evt.preventDefault();
   const nameValue = nameInput.value;
   const jobValue = jobInput.value;
-  name.textContent = nameValue;
-  job.textContent = jobValue;
-  closeModalWindow(editPopup);
+  profileTitle.textContent = nameValue;
+  profileCaption.textContent = jobValue;
+  closeModalWindow(popupEdit);
 }
 
 // Функция добавления новых карточек
@@ -106,9 +109,9 @@ function handleFormSubmit(evt) {
 const addNewCard = (evt) => {
   evt.preventDefault();
   const newElement = createCardByTemplate({name: placeName.value, link: imageLink.value});
-  elements.prepend(newElement);
-  closeModalWindow(addPopup);
-  addFormElement.reset();
+  elementsContainer.prepend(newElement);
+  closeModalWindow(popupAdd);
+  formElementAdd.reset();
 };
 
 // Открытие и закрытие поп-апа на клавишу Esc/Оверлей
@@ -125,38 +128,36 @@ const closePopupOnOverlay = (evt) => {
   }
 }
 
-document.addEventListener('keydown', closePopupOnEscape);
-
 // Обработчик события изменения данных профиля
 
-editFormElement.addEventListener('submit', handleFormSubmit);
+formElementEdit.addEventListener('submit', submitEditProfileForm);
 
 // Обработчик события добавления новой карточки
 
-addFormElement.addEventListener('submit', addNewCard);
+formElementAdd.addEventListener('submit', addNewCard);
 
 // Обработчики событий открытия-закрытия поп-апов
 
-editPopupOpenButton.addEventListener('click', function () {
-  nameInput.value = name.textContent;
-  jobInput.value = job.textContent;
-  openModalWindow(editPopup);
+popupOpenButtonEdit.addEventListener('click', function () {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileCaption.textContent;
+  openModalWindow(popupEdit);
 });
 
-editPopupCloseButton.addEventListener('click', function () {
-  closeModalWindow(editPopup);
+popupCloseButtonEdit.addEventListener('click', function () {
+  closeModalWindow(popupEdit);
 });
 
-addPopupOpenButton.addEventListener('click', function () {
-  openModalWindow(addPopup);
+apopupOpenButtonAdd.addEventListener('click', function () {
+  openModalWindow(popupAdd);
 });
 
-addPopupCloseButton.addEventListener('click', function () {
-  closeModalWindow(addPopup);
+popupCloseButtonAdd.addEventListener('click', function () {
+  closeModalWindow(popupAdd);
 });
 
-imagePopupCloseButton.addEventListener('click', function () {
-  closeModalWindow(imagePopup);
+popupCloseButtonImage.addEventListener('click', function () {
+  closeModalWindow(popupImage);
 });
 
 renderInitialCards();

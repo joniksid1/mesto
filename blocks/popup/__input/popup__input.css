@@ -18,12 +18,3 @@
   border: 0;
   outline: 2px solid rgba(0, 0, 0, .2);
 }
-
-.popup__input:invalid {
-  border-color: #F00;
-}
-
-.popup__input:focus:invalid {
-  border: 0;
-  outline-color: #F00;
-}
