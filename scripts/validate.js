@@ -37,8 +37,7 @@ const preventDefault = (evt) => {
   evt.preventDefault();
 };
 
-const setEventListeners = (validationData) => {
-  const forms = Array.from(document.querySelectorAll(validationData.formSelector));
+const setEventListeners = (forms, validationData) => {
   forms.forEach((form) => {
     const buttonElement = form.querySelector(validationData.submitButtonSelector);
     form.addEventListener('submit', function(evt) {
@@ -60,7 +59,8 @@ const setEventListeners = (validationData) => {
 };
 
 const enableValidation = (validationData) => {
-  setEventListeners(validationData);
+  const forms = Array.from(document.querySelectorAll(validationData.formSelector));
+  setEventListeners(forms, validationData);
 };
 
 enableValidation(validationConfig);
