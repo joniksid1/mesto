@@ -34,6 +34,12 @@ const popupImageCaption = popupImage.querySelector('.image-popup__caption');
 
 //  Функции открытия и закрытия поп-апов
 
+function openCardModalWindow(image, caption) {
+  openModalWindow(popupImage);
+  popupImageImage.src = image;
+  popupImageCaption.textContent = caption;
+}
+
 function openModalWindow(modalWindow) {
   modalWindow.classList.add('popup_opened');
   modalWindow.addEventListener('click', closePopupOnOverlay);
@@ -75,7 +81,7 @@ function submitEditProfileForm(evt) {
 
 const renderInitialCards = () => {
   initialCards.forEach((item) => {
-    const card = new Card(item, cardTemplate);
+    const card = new Card(item, cardTemplate, openCardModalWindow);
     elementsContainer.append(card.createCardByTemplate());
   })
 };
@@ -84,7 +90,7 @@ const renderInitialCards = () => {
 
 const addNewCard = (evt) => {
   evt.preventDefault();
-  const newElement = new Card({name: placeName.value, link: imageLink.value}, cardTemplate);
+  const newElement = new Card({name: placeName.value, link: imageLink.value}, cardTemplate, openCardModalWindow);
   elementsContainer.prepend(newElement.createCardByTemplate());
   closeModalWindow(popupAdd);
   formElementAdd.reset();
