@@ -1,4 +1,9 @@
 import { initialCards, Card } from './Card.js';
+import { validationConfig, FormValidator } from './FormValidator.js';
+
+// Переменная с формами
+
+const forms = document.querySelectorAll(validationConfig.formSelector);
 
 // Переменные карточек
 
@@ -95,6 +100,13 @@ const addNewCard = (evt) => {
   closeModalWindow(popupAdd);
   formElementAdd.reset();
 };
+
+// Функция валидации форм
+
+forms.forEach((form) => {
+  const formValidator = new FormValidator(validationConfig, form);
+  formValidator.enableValidation();
+})
 
 // Обработчик события изменения данных профиля
 

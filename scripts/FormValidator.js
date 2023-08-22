@@ -1,4 +1,6 @@
-const validationConfig = {
+// Конфиг с селекторами и классами для валидации форм
+
+export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -6,7 +8,7 @@ const validationConfig = {
   inputErrorFrameClass: 'popup__input_error-frame',
 };
 
-class FormValidator {
+export class FormValidator {
   constructor(validationConfig, form) {
     this._form = form;
     this._inputSelector = validationConfig.inputSelector;
@@ -71,10 +73,4 @@ class FormValidator {
 
 }
 
-const forms = document.querySelectorAll(validationConfig.formSelector);
-
-forms.forEach((form) => {
-  const formValidator = new FormValidator(validationConfig, form);
-  formValidator.enableValidation();
-})
 
