@@ -1,6 +1,6 @@
 // Данные стандартных карточек при загрузке
 
-const initialCards = [
+export const initialCards = [
   {
     name: 'Москва',
     link: './images/moscow.jpg'

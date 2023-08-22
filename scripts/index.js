@@ -1,3 +1,5 @@
+import { initialCards } from './Card.js';
+
 // Переменные карточек
 
 const elementsContainer = document.querySelector('.elements__list');
