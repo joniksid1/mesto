@@ -8,6 +8,10 @@ export const validationConfig = {
   inputErrorFrameClass: 'popup__input_error-frame',
 };
 
+// Объект с экземплярами валидаторов всех форм
+
+export const formValidators = {}
+
 export class FormValidator {
   constructor(validationConfig, form) {
     this._form = form;
@@ -15,32 +19,35 @@ export class FormValidator {
     this._submitButtonSelector = validationConfig.submitButtonSelector;
     this._inputErrorSelector = validationConfig.inputErrorSelector;
     this._inputErrorFrameClass = validationConfig.inputErrorFrameClass;
+    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
   }
 
-  _checkInputValidity(input, form) {
-    const errorElement = form.querySelector(`${this._inputErrorSelector}${input.name}`);
+  _checkInputValidity(input) {
     if (input.checkValidity()) {
-      this._hideInputError(input, errorElement);
+      this._hideInputError(input);
     } else {
-      this._showInputError(input, errorElement);
+      this._showInputError(input);
     }
   };
 
-  _showInputError(input, errorElement) {
+  _showInputError(input) {
+    const errorElement = this._form.querySelector(`${this._inputErrorSelector}${input.name}`);
     errorElement.textContent = input.validationMessage;
     input.classList.add(this._inputErrorFrameClass);
-  }
+  };
 
-  _hideInputError(input, errorElement) {
+  _hideInputError(input) {
+    const errorElement = this._form.querySelector(`${this._inputErrorSelector}${input.name}`);
     errorElement.textContent = '';
     input.classList.remove(this._inputErrorFrameClass);
   };
 
-  _setButtonState(isActive, buttonElement) {
+  _setButtonState(isActive) {
     if (isActive) {
-      buttonElement.removeAttribute('disabled');
+      this._buttonElement.removeAttribute('disabled');
     } else {
-      buttonElement.setAttribute('disabled', true);
+      this._buttonElement.setAttribute('disabled', true);
     }
   };
 
@@ -48,29 +55,35 @@ export class FormValidator {
     evt.preventDefault();
   };
 
-  _setEventListeners(form) {
-    const buttonElement = form.querySelector(this._submitButtonSelector);
-    form.addEventListener('submit', (evt) => {
-      this._setButtonState(false, buttonElement);
+  _resetValidation() {
+    this._setButtonState(false);
+    this._inputList.forEach((input) => {
+      this._hideInputError(input);
+    });
+  };
+
+  _setEventListeners() {
+    this._form.addEventListener('submit', (evt) => {
+      this._setButtonState(false);
       this._preventDefault(evt);
       });
-      const inputs = Array.from(form.querySelectorAll(this._inputSelector));
-      inputs.forEach((input) => {
+      this._inputList.forEach((input) => {
         input.addEventListener('input', () => {
-          this._checkInputValidity(input, form);
-          if (form.checkValidity()) {
-            this._setButtonState(true, buttonElement);
+          this._checkInputValidity(input);
+          if (this._form.checkValidity()) {
+            this._setButtonState(true);
           } else {
-            this._setButtonState(false, buttonElement);
+            this._setButtonState(false);
           }
         });
       });
   };
 
   enableValidation() {
-    this._setEventListeners(this._form);
+    this._setEventListeners();
   };
 
-}
+};
+
 
 

@@ -1,5 +1,5 @@
 import { initialCards, Card } from './Card.js';
-import { validationConfig, FormValidator } from './FormValidator.js';
+import { validationConfig, formValidators, FormValidator } from './FormValidator.js';
 
 // Переменная с формами
 
@@ -14,34 +14,36 @@ const cardTemplate = document.querySelector('.cards');
 
 const popupEdit = document.querySelector('.edit-popup');
 const popupOpenButtonEdit = document.querySelector('.profile__edit-button');
-const popupCloseButtonEdit = popupEdit.querySelector('.edit-popup__close-button');
-const formElementEdit = popupEdit.querySelector('.edit-popup__form');
+const formElementEdit = document.forms['profile'];
 const nameInput = formElementEdit.querySelector('.popup__input_type_name');
 const jobInput = formElementEdit.querySelector('.popup__input_type_job');
 const profileTitle = document.querySelector('.profile__title');
 const profileCaption = document.querySelector('.profile__caption');
 
+// Кнопки закрытия в поп-апах
+
+const closeButtons = document.querySelectorAll('.popup__close-button');
+
 // Переменные поп-апа добавление карточек
 
 const popupAdd = document.querySelector('.add-popup');
-const formElementAdd = popupAdd.querySelector('.add-popup__form');
+const formElementAdd = document.forms['add'];
 const popupOpenButtonAdd = document.querySelector('.profile__add-button');
-const popupCloseButtonAdd = popupAdd.querySelector('.add-popup__close-button')
 const placeName = popupAdd.querySelector('.popup__input_type_place-name');
 const imageLink = popupAdd.querySelector('.popup__input_type_image-link');
 
 // Переменные поп-апа с картинкой
 
 const popupImage = document.querySelector('.image-popup');
-const popupCloseButtonImage = document.querySelector('.image-popup__close-button');
-const popupImageImage = popupImage.querySelector('.image-popup__image');
+const popupImageElement = popupImage.querySelector('.image-popup__image');
 const popupImageCaption = popupImage.querySelector('.image-popup__caption');
 
 //  Функции открытия и закрытия поп-апов
 
 function openCardModalWindow(image, caption) {
   openModalWindow(popupImage);
-  popupImageImage.src = image;
+  popupImageElement.src = image;
+  popupImageElement.alt = `Изображение с местом: ${caption}`;
   popupImageCaption.textContent = caption;
 }
 
@@ -82,12 +84,18 @@ function submitEditProfileForm(evt) {
   closeModalWindow(popupEdit);
 }
 
+// Функция создания карточек
+
+function createCard(item) {
+  const cardElement = new Card(item, cardTemplate, openCardModalWindow);
+  return cardElement.createCardByTemplate();
+}
+
 // Отрисовка изначальных карточек
 
 const renderInitialCards = () => {
   initialCards.forEach((item) => {
-    const card = new Card(item, cardTemplate, openCardModalWindow);
-    elementsContainer.append(card.createCardByTemplate());
+    elementsContainer.append(createCard(item));
   })
 };
 
@@ -95,18 +103,24 @@ const renderInitialCards = () => {
 
 const addNewCard = (evt) => {
   evt.preventDefault();
-  const newElement = new Card({name: placeName.value, link: imageLink.value}, cardTemplate, openCardModalWindow);
-  elementsContainer.prepend(newElement.createCardByTemplate());
+  elementsContainer.prepend(createCard({name: placeName.value, link: imageLink.value}));
   closeModalWindow(popupAdd);
   formElementAdd.reset();
 };
 
 // Функция валидации форм
 
-forms.forEach((form) => {
-  const formValidator = new FormValidator(validationConfig, form);
-  formValidator.enableValidation();
-})
+const enableValidation = (validationConfig) => {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationConfig, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
 
 // Обработчик события изменения данных профиля
 
@@ -124,20 +138,14 @@ popupOpenButtonEdit.addEventListener('click', function () {
   openModalWindow(popupEdit);
 });
 
-popupCloseButtonEdit.addEventListener('click', function () {
-  closeModalWindow(popupEdit);
-});
-
 popupOpenButtonAdd.addEventListener('click', function () {
   openModalWindow(popupAdd);
+  formValidators['add']._resetValidation();
 });
 
-popupCloseButtonAdd.addEventListener('click', function () {
-  closeModalWindow(popupAdd);
-});
-
-popupCloseButtonImage.addEventListener('click', function () {
-  closeModalWindow(popupImage);
+closeButtons.forEach((button) => {
+  const popupCurrent = button.closest('.popup');
+  button.addEventListener('click', () => closeModalWindow(popupCurrent));
 });
 
 renderInitialCards();
