@@ -55,13 +55,6 @@ export class FormValidator {
     evt.preventDefault();
   };
 
-  _resetValidation() {
-    this._setButtonState(false);
-    this._inputList.forEach((input) => {
-      this._hideInputError(input);
-    });
-  };
-
   _setEventListeners() {
     this._form.addEventListener('submit', (evt) => {
       this._setButtonState(false);
@@ -77,6 +70,13 @@ export class FormValidator {
           }
         });
       });
+  };
+
+  resetValidation() {
+    this._setButtonState(false);
+    this._inputList.forEach((input) => {
+      this._hideInputError(input);
+    });
   };
 
   enableValidation() {

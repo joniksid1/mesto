@@ -135,12 +135,13 @@ formElementAdd.addEventListener('submit', addNewCard);
 popupOpenButtonEdit.addEventListener('click', function () {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileCaption.textContent;
+  formValidators['profile'].resetValidation();
   openModalWindow(popupEdit);
 });
 
 popupOpenButtonAdd.addEventListener('click', function () {
   openModalWindow(popupAdd);
-  formValidators['add']._resetValidation();
+  formValidators['add'].resetValidation();
 });
 
 closeButtons.forEach((button) => {
