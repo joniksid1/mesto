@@ -1,5 +1,6 @@
 import { initialCards, Card } from './Card.js';
 import { validationConfig, formValidators, FormValidator } from './FormValidator.js';
+import { Section } from './Section.js';
 
 // Переменная с формами
 
@@ -7,7 +8,6 @@ const forms = document.querySelectorAll(validationConfig.formSelector);
 
 // Переменные карточек
 
-const elementsContainer = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('.cards');
 
 // Переменные для редактирования профиля
@@ -84,39 +84,43 @@ function submitEditProfileForm(evt) {
   closeModalWindow(popupEdit);
 }
 
-// Функция создания карточек
-
-function createCard(item) {
-  const cardElement = new Card(item, cardTemplate, openCardModalWindow);
-  return cardElement.createCardByTemplate();
-}
-
 // Отрисовка изначальных карточек
 
-const renderInitialCards = () => {
-  initialCards.forEach((item) => {
-    elementsContainer.append(createCard(item));
-  })
-};
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = new Card(item, cardTemplate, openCardModalWindow);
+    cardList.addItem(cardElement.createCardByTemplate());
+    }
+  }, '.elements__list');
 
 // Функция добавления новых карточек
 
-const addNewCard = (evt) => {
-  evt.preventDefault();
-  elementsContainer.prepend(createCard({name: placeName.value, link: imageLink.value}));
-  closeModalWindow(popupAdd);
-  formElementAdd.reset();
-};
+const newCard = new Section({
+  items: {},
+  renderer: () => {
+    const cardElement = new Card({name: placeName.value, link: imageLink.value}, cardTemplate, openCardModalWindow);
+    cardList.addItem(cardElement.createCardByTemplate());
+  }
+  }, '.elements__list');
 
 // Функция валидации форм
+
+const startValidate = (validator) => {
+  validator.startValidate();
+}
+
+const createValidators = (validationConfig, formElement) => {
+  const validator = new FormValidator(validationConfig, formElement);
+  const formName = formElement.getAttribute('name');
+  formValidators[formName] = validator;
+  startValidate(validator);
+}
 
 const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(validationConfig.formSelector))
   formList.forEach((formElement) => {
-    const validator = new FormValidator(validationConfig, formElement);
-    const formName = formElement.getAttribute('name');
-    formValidators[formName] = validator;
-    validator.enableValidation();
+    createValidators(validationConfig, formElement);
   });
 };
 
@@ -128,7 +132,12 @@ formElementEdit.addEventListener('submit', submitEditProfileForm);
 
 // Обработчик события добавления новой карточки
 
-formElementAdd.addEventListener('submit', addNewCard);
+formElementAdd.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  newCard.renderItem();
+  closeModalWindow(popupAdd);
+  formElementAdd.reset();
+});
 
 // Обработчики событий открытия-закрытия поп-апов
 
@@ -149,4 +158,5 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closeModalWindow(popupCurrent));
 });
 
-renderInitialCards();
+cardList.renderInitialItems();
+

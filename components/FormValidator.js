@@ -24,10 +24,10 @@ export class FormValidator {
   }
 
   _checkInputValidity(input) {
-    if (input.checkValidity()) {
-      this._hideInputError(input);
-    } else {
+    if (!input.validity.valid) {
       this._showInputError(input);
+    } else {
+      this._hideInputError(input)
     }
   };
 
@@ -79,7 +79,7 @@ export class FormValidator {
     });
   };
 
-  enableValidation() {
+  startValidate() {
     this._setEventListeners();
   };
 
