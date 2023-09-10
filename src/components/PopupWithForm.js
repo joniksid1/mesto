@@ -5,16 +5,27 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this.modalWindow = document.querySelector(popupSelector);
     this.formSubmitter = formSubmitter;
+    this._inputList = this.modalWindow.querySelectorAll('.popup__input');
+    this._popupForm = this.modalWindow.querySelector('.popup__form');
   }
 
   _getInputValues() {
-    this._inputList = this.modalWindow.querySelectorAll('.popup__input');
     this._formValues = {};
     this._inputList.forEach(input => {
       this._formValues[input.name] = input.value;
     });
     return this._formValues;
   }
+  //   this._formValues = {};
+  //   this._inputList.forEach(input => {
+  //     if (input.name === 'place-name') {
+  //       this._formValues['name'] = input.value;
+  //     } else if (input.name === 'image-link') {
+  //       this._formValues['link'] = input.value;
+  //     }
+  //   });
+  //   return this._formValues;
+  // }
 
   setEventListeners() {
     super.setEventListeners();
@@ -26,6 +37,6 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this.modalWindow.querySelector('.popup__form').reset();
+    this._popupForm.reset();
   };
 }

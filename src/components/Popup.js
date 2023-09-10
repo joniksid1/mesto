@@ -4,33 +4,29 @@ export default class Popup {
     this.modalWindow = document.querySelector(popupSelector);
   }
 
-  _handleEscClose(evt) {
+  _handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
       this.close(evt.currentTarget.querySelector('.popup_opened'));
     }
   }
 
-  _handleOverlayClose(evt) {
-    if (evt.target === evt.currentTarget) {
-      this.close(evt.currentTarget);
-    }
-  }
-
   open() {
     this.modalWindow.classList.add('popup_opened');
-    this.modalWindow.addEventListener('click', this._handleOverlayClose.bind(this));
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    document.addEventListener('keydown', this._handleEscClose);
   };
 
   close() {
     this.modalWindow.classList.remove('popup_opened');
-    this.modalWindow.removeEventListener('click', this._handleOverlayClose.bind(this));
-    document.removeEventListener('keydown', this._handleEscClose.bind(this));
+    document.removeEventListener('keydown', this._handleEscClose);
   };
 
   setEventListeners() {
-    const closeButton = this.modalWindow.querySelector('.popup__close-button');
-    closeButton.addEventListener('click', this.close.bind(this));
-  };
+    this.modalWindow.addEventListener('mouseup', (evt) => {
+      const targetClassList = evt.target.classList;
+      if (targetClassList.contains('popup') || targetClassList.contains('popup__close-button')) {
+        this.close();
+      }
+    })
+  }
 
 }
