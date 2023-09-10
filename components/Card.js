@@ -28,8 +28,8 @@ export const initialCards = [
 ];
 
 export class Card {
-  constructor(data, cardTemplate, openCardModalWindow) {
-    this._openCardModalWindow = openCardModalWindow;
+  constructor(data, cardTemplate) {  //был ещё , openCardModalWindow, нужна привязка с классом Popup
+    // this._openCardModalWindow = openCardModalWindow;
     this._cardTitle = data.name;
     this._imageLink = data.link;
     this._card = cardTemplate.content.cloneNode(true);
@@ -57,9 +57,9 @@ export class Card {
       this._deleteCard(evt);
     });
 
-    this._cardImageElement.addEventListener('click', () => {
-      this._openCardModalWindow(this._imageLink, this._cardTitle);
-    });
+    // this._cardImageElement.addEventListener('click', () => {
+    //   this._openCardModalWindow(this._imageLink, this._cardTitle);
+    // });
   }
 
   createCardByTemplate() {
