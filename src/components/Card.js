@@ -1,29 +1,36 @@
+const moscow = new URL('../images/moscow.jpg', import.meta.url);
+const altay = new URL('../images/altai.jpg', import.meta.url);
+const baykal = new URL('../images/baikal.jpg', import.meta.url);
+const kamchatka = new URL('../images/kamchatka.jpg', import.meta.url);
+const karelia = new URL('../images/karelia.jpg', import.meta.url);
+const arkhyz = new URL('../images/arkhyz.jpg', import.meta.url)
+
 // Данные стандартных карточек при загрузке
 
 export const initialCards = [
   {
     name: 'Москва',
-    link: './images/moscow.jpg'
+    link: moscow
   },
   {
     name: 'Алтай',
-    link: './images/altai.jpg'
+    link: altay
   },
   {
     name: 'Байкал',
-    link: './images/baikal.jpg'
+    link: baykal
   },
   {
     name: 'Камчатка',
-    link: './images/kamchatka.jpg'
+    link: kamchatka
   },
   {
     name: 'Карелия',
-    link: './images/karelia.jpg'
+    link: karelia
   },
   {
     name: 'Архыз',
-    link: './images/arkhyz.jpg'
+    link: arkhyz
   }
 ];
 
