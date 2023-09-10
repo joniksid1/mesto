@@ -1,5 +1,5 @@
 export default class Popup {
-  constructor(popupSelector) {
+  constructor({ popupSelector }) {
     this.popupSelector = popupSelector;
     this.modalWindow = document.querySelector(popupSelector);
   }
