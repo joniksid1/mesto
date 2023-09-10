@@ -3,7 +3,7 @@ import { validationConfig, formValidators, FormValidator } from './FormValidator
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
-
+import UserInfo from './UserInfo.js';
 
 const cardTemplate = document.querySelector('.cards');
 
@@ -18,16 +18,7 @@ const profileCaption = document.querySelector('.profile__caption');
 
 // Переменные поп-апа добавление карточек
 
-const formElementAdd = document.forms['add'];
 const popupOpenButtonAdd = document.querySelector('.profile__add-button');
-// const placeName = popupAdd.querySelector('.popup__input_type_place-name');
-// const imageLink = popupAdd.querySelector('.popup__input_type_image-link');
-
-// Переменные поп-апа с картинкой
-
-// const popupImage = document.querySelector('.image-popup');
-// const popupImageElement = popupImage.querySelector('.image-popup__image');
-// const popupImageCaption = popupImage.querySelector('.image-popup__caption');
 
 // Экземпляр отрисовки изначальных карточек
 
@@ -71,15 +62,28 @@ const enableValidation = (validationConfig) => {
 
 enableValidation(validationConfig);
 
+// Получение обновлённых данных пользователя
+
+const getUserInfo = (profileTitle, profileCaption) => {
+  const newUserInfo = new UserInfo(profileTitle, profileCaption);
+  const userData = newUserInfo.getUserInfo();
+  return userData;
+};
+
+// Экземпляр данных пользователя для отображения на странице
+
+const userInfo = new UserInfo(profileTitle.textContent, profileCaption.textContent);
+
 // Экземпляр поп-апа редактирования профиля
 
 const popupProfileEdit = new PopupWithForm('.edit-popup', submitEditProfileForm);
 
 function submitEditProfileForm( { name, job } ) {
-  profileTitle.textContent = name;
-  profileCaption.textContent = job;
+  userInfo.setUserInfo({ name, job }, profileTitle, profileCaption);
   popupProfileEdit.close();
 }
+
+// Экземпляр поп-апа добавления новой карточки
 
 const popupCardAdd = new PopupWithForm('.add-popup', submitAddProfileForm);
 
@@ -97,8 +101,9 @@ function handleCardClick (image, caption) {
 // Обработчики событий открытия поп-апов
 
 popupOpenButtonEdit.addEventListener('click', function () {
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileCaption.textContent;
+  const userData = getUserInfo(profileTitle.textContent, profileCaption.textContent);
+  nameInput.value = userData.name;
+  jobInput.value = userData.job;
   formValidators['profile'].resetValidation();
   popupProfileEdit.open();
 });
