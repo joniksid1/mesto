@@ -13,9 +13,9 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo(data) {
-    this.profileTitle.textContent = data.name;
-    this.profileCaption.textContent = data.job;
+  setUserInfo({ name, job}) {
+    this.profileTitle.textContent = name;
+    this.profileCaption.textContent = job;
   }
 
 }

@@ -51,13 +51,13 @@
       <h2 class="popup__title add-popup__title">Новое место</h2>
       <form name="add" class="popup__form add-popup__form" novalidate>
         <div class="popup__form-wrapper">
-          <input name="place-name" minlength="2" maxlength="30" placeholder="Название" type="text" id="placeName" class="popup__input popup__input_type_place-name" required>
-          <span class="popup__input-error popup__input-error_type_place-name" id="placeName-error"></span>
+          <input name="place" minlength="2" maxlength="30" placeholder="Название" type="text" id="placeName" class="popup__input popup__input_type_place" required>
+          <span class="popup__input-error popup__input-error_type_place" id="placeName-error"></span>
         </div>
         <div class="popup__form-wrapper">
-          <input name="image-link" placeholder="Ссылка на картинку" type="url"
-          id="imageLink" class="popup__input popup__input_type_image-link" required>
-          <span class="popup__input-error popup__input-error_type_image-link" id="imageLink-error"></span>
+          <input name="link" placeholder="Ссылка на картинку" type="url"
+          id="imageLink" class="popup__input popup__input_type_link" required>
+          <span class="popup__input-error popup__input-error_type_link" id="imageLink-error"></span>
         </div>
         <button class="popup__button add-popup__button" type="submit" disabled>Создать</button>
       </form>

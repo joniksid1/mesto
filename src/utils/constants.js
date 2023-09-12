@@ -24,27 +24,27 @@ const popupOpenButtonAdd = document.querySelector('.profile__add-button');
 
 const initialCards = [
   {
-    name: 'Москва',
+    place: 'Москва',
     link: moscow
   },
   {
-    name: 'Алтай',
+    place: 'Алтай',
     link: altay
   },
   {
-    name: 'Байкал',
+    place: 'Байкал',
     link: baykal
   },
   {
-    name: 'Камчатка',
+    place: 'Камчатка',
     link: kamchatka
   },
   {
-    name: 'Карелия',
+    place: 'Карелия',
     link: karelia
   },
   {
-    name: 'Архыз',
+    place: 'Архыз',
     link: arkhyz
   }
 ];

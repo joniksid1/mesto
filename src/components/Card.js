@@ -1,22 +1,13 @@
 export default class Card {
-  constructor(data, cardTemplate, handleCardClick) {
+  constructor({ place, link }, cardTemplate, handleCardClick) {
     this.handleCardClick = handleCardClick;
-    this._cardTitle = this._getValue(data, 'name', 'place-name');
-    this._imageLink = this._getValue(data, 'link', 'image-link');
+    this._cardTitle = place;
+    this._imageLink = link;
     this._card = cardTemplate.content.cloneNode(true);
     this._cardImageElement = this._card.querySelector('.elements__image');
     this._cardTitleElement = this._card.querySelector('.elements__title');
     this._likeButton = this._card.querySelector('.elements__heart');
     this._deleteButton = this._card.querySelector('.elements__delete');
-  }
-
-  _getValue(obj, ...keys) {
-    for (const key of keys) {
-      if (obj[key] !== undefined) {
-        return obj[key];
-      }
-    }
-    return '';
   }
 
   _likeCard(evt) {

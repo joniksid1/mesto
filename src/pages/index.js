@@ -85,9 +85,9 @@ function handleCardClick (image, caption) {
 // Обработчики событий открытия поп-апов
 
 popupOpenButtonEdit.addEventListener('click', function () {
-  const userData = userInfo.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.job;
+  const { name, job } = userInfo.getUserInfo();
+  nameInput.value = name;
+  jobInput.value = job;
   formValidators['profile'].resetValidation();
   popupProfileEdit.open();
 });
