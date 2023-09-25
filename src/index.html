@@ -14,9 +14,9 @@
       <section class="profile">
         <img src="<%=require('./images/kusto.png')%>" alt="Аватар пользователя" class="profile__image">
         <div class="profile__info">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <h1 class="profile__title"></h1>
           <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
-          <p class="profile__caption">Исследователь океана</p>
+          <p class="profile__caption"></p>
         </div>
         <button class="profile__add-button" type="button" aria-label="Добавить"></button>
       </section>
@@ -51,13 +51,13 @@
       <h2 class="popup__title add-popup__title">Новое место</h2>
       <form name="add" class="popup__form add-popup__form" novalidate>
         <div class="popup__form-wrapper">
-          <input name="place" minlength="2" maxlength="30" placeholder="Название" type="text" id="placeName" class="popup__input popup__input_type_place" required>
-          <span class="popup__input-error popup__input-error_type_place" id="placeName-error"></span>
+          <input name="place" minlength="2" maxlength="30" placeholder="Название" type="text" id="name" class="popup__input popup__input_type_place" required>
+          <span class="popup__input-error popup__input-error_type_place" id="name-error"></span>
         </div>
         <div class="popup__form-wrapper">
           <input name="link" placeholder="Ссылка на картинку" type="url"
-          id="imageLink" class="popup__input popup__input_type_link" required>
-          <span class="popup__input-error popup__input-error_type_link" id="imageLink-error"></span>
+          id="link" class="popup__input popup__input_type_link" required>
+          <span class="popup__input-error popup__input-error_type_link" id="link-error"></span>
         </div>
         <button class="popup__button add-popup__button" type="submit" disabled>Создать</button>
       </form>

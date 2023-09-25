@@ -1,7 +1,7 @@
 export default class Card {
-  constructor({ place, link }, cardTemplate, handleCardClick) {
+  constructor({ name, link }, cardTemplate, handleCardClick) {
     this.handleCardClick = handleCardClick;
-    this._cardTitle = place;
+    this._cardTitle = name;
     this._imageLink = link;
     this._card = cardTemplate.content.cloneNode(true);
     this._cardImageElement = this._card.querySelector('.elements__image');

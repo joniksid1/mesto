@@ -13,9 +13,9 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ name, job}) {
-    this.profileTitle.textContent = name;
-    this.profileCaption.textContent = job;
+  setUserInfo({ nameInput, jobInput }) {
+    this.profileTitle.textContent = nameInput;
+    this.profileCaption.textContent = jobInput;
   }
 
 }

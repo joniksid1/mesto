@@ -18,8 +18,10 @@ import {
   profileTitleSelector,
   profileCaptionSelector,
   popupOpenButtonAdd,
-  initialCards,
-  apiOptions
+  apiOptions,
+  profileTitle,
+  profileCaption,
+  profileAvatar
 } from '../utils/constants.js';
 
 const createCard = (item, cardTemplate, handleCardClick) => {
@@ -110,6 +112,13 @@ popupImage.setEventListeners();
 
 
 api.getInitialCards()
-.then((data) => {
-  cardList.renderInitialItems(data);
+  .then((data) => {
+    cardList.renderInitialItems(data);
+});
+
+api.getUserInfo()
+  .then((data) => {
+    profileTitle.textContent = data.name;
+    profileCaption.textContent = data.about;
+    profileAvatar.src = data.avatar;
 });
