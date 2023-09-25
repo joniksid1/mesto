@@ -9,6 +9,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 import {
   cardTemplate,
   popupOpenButtonEdit,
@@ -17,7 +18,8 @@ import {
   profileTitleSelector,
   profileCaptionSelector,
   popupOpenButtonAdd,
-  initialCards
+  initialCards,
+  apiOptions
 } from '../utils/constants.js';
 
 const createCard = (item, cardTemplate, handleCardClick) => {
@@ -25,10 +27,11 @@ const createCard = (item, cardTemplate, handleCardClick) => {
   return cardList.addItem(cardElement.createCardByTemplate());
 }
 
+const api = new Api(apiOptions);
+
 // Экземпляр отрисовки изначальных карточек
 
 const cardList = new Section({
-  items: initialCards,
   renderer: (item) => {
     createCard(item, cardTemplate, handleCardClick);
     }
@@ -97,10 +100,16 @@ popupOpenButtonAdd.addEventListener('click', function () {
   formValidators['add'].resetValidation();
 });
 
-cardList.renderInitialItems();
+// cardList.renderInitialItems();
 
 popupProfileEdit.setEventListeners();
 
 popupCardAdd.setEventListeners();
 
 popupImage.setEventListeners();
+
+
+api.getInitialCards()
+.then((data) => {
+  cardList.renderInitialItems(data);
+});
