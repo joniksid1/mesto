@@ -66,7 +66,13 @@ const userInfo = new UserInfo({ nameSelector: profileTitleSelector, jobSelector:
 const popupProfileEdit = new PopupWithForm( {
   popupSelector: '.edit-popup',
   formSubmitter: (data) => {
-    userInfo.setUserInfo(data);
+    api.setUserInfo(data)
+      .then((data) => {
+        userInfo.setUserInfo(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     popupProfileEdit.close();
     }
   });
@@ -76,7 +82,13 @@ const popupProfileEdit = new PopupWithForm( {
 const popupCardAdd = new PopupWithForm( {
   popupSelector: '.add-popup',
   formSubmitter: (data) => {
-    createCard(data, cardTemplate, handleCardClick);;
+    api.createCard(data)
+      .then((data) => {
+        createCard(data, cardTemplate, handleCardClick);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     popupCardAdd.close();
     }
   });
@@ -102,8 +114,6 @@ popupOpenButtonAdd.addEventListener('click', function () {
   formValidators['add'].resetValidation();
 });
 
-// cardList.renderInitialItems();
-
 popupProfileEdit.setEventListeners();
 
 popupCardAdd.setEventListeners();
@@ -114,11 +124,19 @@ popupImage.setEventListeners();
 api.getInitialCards()
   .then((data) => {
     cardList.renderInitialItems(data);
-});
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 api.getUserInfo()
   .then((data) => {
     profileTitle.textContent = data.name;
     profileCaption.textContent = data.about;
     profileAvatar.src = data.avatar;
-});
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+

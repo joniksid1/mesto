@@ -25,6 +25,18 @@ export default class Api {
     })
   }
 
+  setUserInfo (data) {
+    return this._getRequest(`${this._url}/users/me`, {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: data.nameInput,
+          about: data.about
+        }),
+      }
+    )
+  }
+
   getInitialCards () {
       return this._getRequest(`${this._url}/cards`, {
           method: 'GET',
