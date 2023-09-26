@@ -8,6 +8,7 @@ import {
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupDeleteCard from '../components/PopupDeleteCard';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import {
@@ -26,7 +27,7 @@ import {
 
 const createCard = (item, cardTemplate, handleCardClick) => {
   const cardElement = new Card(item, cardTemplate, handleCardClick);
-  return cardList.addItem(cardElement.createCardByTemplate());
+  return cardList.addItem(cardElement.createCardByTemplate(item));
 }
 
 const api = new Api(apiOptions);
@@ -91,13 +92,22 @@ const popupCardAdd = new PopupWithForm( {
       });
     popupCardAdd.close();
     }
-  });
+});
 
 const popupImage = new PopupWithImage('.image-popup');
 
 function handleCardClick (image, caption) {
   popupImage.open(image, caption);
 }
+
+// Экземпляр поп-апа удаления карточки
+
+// const popupDeleteCard = new PopupDeleteCard( {
+//   popupSelector: '.delete-popup',
+//   formSubmitter: () => {
+
+//   }
+// });
 
 // Обработчики событий открытия поп-апов
 

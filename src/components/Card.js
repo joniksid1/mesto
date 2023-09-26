@@ -7,6 +7,7 @@ export default class Card {
     this._cardImageElement = this._card.querySelector('.elements__image');
     this._cardTitleElement = this._card.querySelector('.elements__title');
     this._likeButton = this._card.querySelector('.elements__heart');
+    this._likeCounter = this._card.querySelector('.elements__like-counter');
     this._deleteButton = this._card.querySelector('.elements__delete');
   }
 
@@ -33,9 +34,10 @@ export default class Card {
     });
   }
 
-  createCardByTemplate() {
+  createCardByTemplate(data) {
     this._cardTitleElement.textContent = this._cardTitle;
     this._cardImageElement.src = this._imageLink;
+    this._likeCounter.textContent = data.likes.length;
     this._cardImageElement.alt = `Изображение с местом: ${this._cardTitle}`;
     this._setEventListeners();
     return this._card;

@@ -70,13 +70,25 @@
       <figcaption class="image-popup__caption"></figcaption>
     </figure>
   </div>
+  <div class="popup delete-popup popup_opened">
+    <div class="popup__container delete-popup__container">
+      <button class="popup__close-button delete-popup__close-button" type="button" aria-label="Закрыть"></button>
+      <h2 class="popup__title add-popup__title">Вы уверены?</h2>
+      <form name="delete" class="popup__form delete-popup__form" novalidate>
+        <button class="popup__button delete-popup__button" type="submit">Да</button>
+      </form>
+    </div>
+  </div>
   <template class="cards">
     <li class="elements__list-item">
       <img alt="Изображение места на карточке" class="elements__image">
       <button class="elements__delete" type="button"></button>
       <div class="elements__caption">
         <h2 class="elements__title"></h2>
-        <button class="elements__heart" type="button"></button>
+        <div class="elements__like-wrapper">
+          <button class="elements__heart" type="button"></button>
+          <p class="elements__like-counter">0</p>
+        </div>
       </div>
     </li>
   </template>
