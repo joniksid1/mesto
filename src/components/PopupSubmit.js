@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 
-export default class PopupDeleteCard extends Popup {
+export default class PopupSubmit extends Popup {
   constructor({ popupSelector, formSubmitter }) {
     super(popupSelector);
     this.modalWindow = document.querySelector(popupSelector);

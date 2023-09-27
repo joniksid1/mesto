@@ -1,8 +1,9 @@
 export default class Card {
-  constructor({ name, link }, cardTemplate, handleCardClick) {
+  constructor({ name, link }, cardTemplate, handleCardClick, handleDeleteCard) {
     this.handleCardClick = handleCardClick;
     this._cardTitle = name;
     this._imageLink = link;
+    this._handleDeleteCard = handleDeleteCard;
     this._card = cardTemplate.content.cloneNode(true);
     this._cardImageElement = this._card.querySelector('.elements__image');
     this._cardTitleElement = this._card.querySelector('.elements__title');
@@ -26,7 +27,7 @@ export default class Card {
     });
 
     this._deleteButton.addEventListener('click', (evt) => {
-      this._deleteCard(evt);
+      this._handleDeleteCard();
     });
 
     this._cardImageElement.addEventListener('click', () => {

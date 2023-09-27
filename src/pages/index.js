@@ -8,7 +8,7 @@ import {
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import PopupDeleteCard from '../components/PopupDeleteCard';
+import PopupSubmit from '../components/PopupSubmit';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import {
@@ -25,8 +25,8 @@ import {
   profileAvatar
 } from '../utils/constants.js';
 
-const createCard = (item, cardTemplate, handleCardClick) => {
-  const cardElement = new Card(item, cardTemplate, handleCardClick);
+const createCard = (item, cardTemplate, handleCardClick, handleDeleteCard) => {
+  const cardElement = new Card(item, cardTemplate, handleCardClick, handleDeleteCard);
   return cardList.addItem(cardElement.createCardByTemplate(item));
 }
 
@@ -36,7 +36,7 @@ const api = new Api(apiOptions);
 
 const cardList = new Section({
   renderer: (item) => {
-    createCard(item, cardTemplate, handleCardClick);
+    createCard(item, cardTemplate, handleCardClick, handleDeleteCard);
     }
   }, '.elements__list');
 
@@ -98,16 +98,36 @@ const popupImage = new PopupWithImage('.image-popup');
 
 function handleCardClick (image, caption) {
   popupImage.open(image, caption);
-}
+};
+
+function handleDeleteCard () {
+  popupDeleteCard.open();
+};
 
 // Экземпляр поп-апа удаления карточки
 
-// const popupDeleteCard = new PopupDeleteCard( {
-//   popupSelector: '.delete-popup',
-//   formSubmitter: () => {
+const popupDeleteCard = new PopupSubmit( {
+  popupSelector: '.delete-popup',
+  formSubmitter: (data) => {
+    api.deleteCard(data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    popupCardAdd.close();
+    }
+});
 
-//   }
-// });
+// Экземпляр поп-апа редактирования аватарки
+
+const popupAvatarChange = new PopupSubmit( {
+  popupSelector: '.avatar-popup',
+  formSubmitter: () => {
+
+  }
+});
 
 // Обработчики событий открытия поп-апов
 
@@ -124,12 +144,19 @@ popupOpenButtonAdd.addEventListener('click', function () {
   formValidators['add'].resetValidation();
 });
 
+profileAvatar.addEventListener('click', function () {
+  popupAvatarChange.open();
+});
+
 popupProfileEdit.setEventListeners();
 
 popupCardAdd.setEventListeners();
 
 popupImage.setEventListeners();
 
+popupDeleteCard.setEventListeners();
+
+popupAvatarChange.setEventListeners();
 
 api.getInitialCards()
   .then((data) => {
