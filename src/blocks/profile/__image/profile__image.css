@@ -1,7 +1,14 @@
 .profile__image {
   width: 120px;
   height: 120px;
+  position: absolute;
+  top: 0;
+  left: 0;
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
+}
+
+.profile__image:hover {
+  opacity: .2;
 }
