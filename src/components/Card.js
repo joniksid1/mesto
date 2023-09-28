@@ -1,8 +1,9 @@
 export default class Card {
-  constructor({ name, link }, cardTemplate, handleCardClick, handleDeleteCard) {
+  constructor(data, cardTemplate, handleCardClick,{ handleDeleteCard }) {
     this.handleCardClick = handleCardClick;
-    this._cardTitle = name;
-    this._imageLink = link;
+    this._cardTitle = data.name;
+    this._imageLink = data.link;
+    this._id = data._id;
     this._handleDeleteCard = handleDeleteCard;
     this._card = cardTemplate.content.cloneNode(true);
     this._cardImageElement = this._card.querySelector('.elements__image');
@@ -16,9 +17,8 @@ export default class Card {
     evt.target.classList.toggle('elements__heart_active');;
   };
 
-  _deleteCard(evt) {
-    const card = evt.target.closest(".elements__list-item");
-    card.remove();
+  deleteCard() {
+    this._cardElement.remove();
   };
 
   _setEventListeners() {
@@ -27,6 +27,7 @@ export default class Card {
     });
 
     this._deleteButton.addEventListener('click', (evt) => {
+      this._cardElement = evt.target.closest('.elements__list-item');
       this._handleDeleteCard();
     });
 

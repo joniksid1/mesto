@@ -52,8 +52,8 @@ export default class Api {
       })
   }
 
-  deleteCard (data) {
-      return this._getRequest(`${this._url}/tasks/${data.id}`, {
+  deleteCard (id) {
+      return this._getRequest(`${this._url}/cards/${id}`, {
           method: 'DELETE',
           headers: this._headers
       })

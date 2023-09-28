@@ -25,9 +25,18 @@ import {
   profileAvatar
 } from '../utils/constants.js';
 
-const createCard = (item, cardTemplate, handleCardClick, handleDeleteCard) => {
-  const cardElement = new Card(item, cardTemplate, handleCardClick, handleDeleteCard);
-  return cardList.addItem(cardElement.createCardByTemplate(item));
+const createCard = (data, cardTemplate, handleCardClick) => {
+  const cardElement = new Card(
+      data,
+      cardTemplate,
+      handleCardClick,
+      {
+        handleDeleteCard: () => {
+          popupDeleteCard.submitDeleteCard(cardElement);
+        }
+      }
+    );
+  return cardList.addItem(cardElement.createCardByTemplate(data));
 }
 
 const api = new Api(apiOptions);
@@ -35,8 +44,8 @@ const api = new Api(apiOptions);
 // Экземпляр отрисовки изначальных карточек
 
 const cardList = new Section({
-  renderer: (item) => {
-    createCard(item, cardTemplate, handleCardClick, handleDeleteCard);
+  renderer: (data) => {
+    createCard(data, cardTemplate, handleCardClick);
     }
   }, '.elements__list');
 
@@ -82,7 +91,7 @@ const popupProfileEdit = new PopupWithForm( {
 
 const popupCardAdd = new PopupWithForm( {
   popupSelector: '.add-popup',
-  formSubmitter: (data) => {
+  formSubmitter: (data, ) => {
     api.createCard(data)
       .then((data) => {
         createCard(data, cardTemplate, handleCardClick);
@@ -100,23 +109,17 @@ function handleCardClick (image, caption) {
   popupImage.open(image, caption);
 };
 
-function handleDeleteCard () {
-  popupDeleteCard.open();
-};
-
 // Экземпляр поп-апа удаления карточки
 
 const popupDeleteCard = new PopupSubmit( {
   popupSelector: '.delete-popup',
-  formSubmitter: (data) => {
-    api.deleteCard(data)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    popupCardAdd.close();
+  formSubmitter: (card) => {
+    api.deleteCard(card._id).then(() => {
+      card.deleteCard();
+    }).catch((error) => {
+      console.log(error);
+    })
+    popupDeleteCard.close();
     }
 });
 

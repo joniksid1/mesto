@@ -8,9 +8,9 @@ export default class Section {
     this._elementsContainer.prepend(element);
   }
 
-  renderInitialItems(items) {
+  renderInitialItems(items, handleDeleteCard) {
     items.forEach((item) => {
-      this.renderer(item);
+      this.renderer(item, handleDeleteCard);
     });
 
   }

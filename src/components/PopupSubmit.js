@@ -8,11 +8,16 @@ export default class PopupSubmit extends Popup {
     this._popupForm = this.modalWindow.querySelector('.popup__form');
   }
 
+  submitDeleteCard(card) {
+    this._card = card;
+    super.open();
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this.modalWindow.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this.formSubmitter();
+      this.formSubmitter(this._card);
     });
   };
 
