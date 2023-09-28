@@ -25,6 +25,8 @@ import {
   profileAvatar
 } from '../utils/constants.js';
 
+let userId;
+
 const createCard = (data, cardTemplate, handleCardClick) => {
   const cardElement = new Card(
       data,
@@ -34,8 +36,10 @@ const createCard = (data, cardTemplate, handleCardClick) => {
         handleDeleteCard: () => {
           popupDeleteCard.submitDeleteCard(cardElement);
         }
-      }
+      },
+      userId
     );
+  cardElement.handleDeleteCheck();
   return cardList.addItem(cardElement.createCardByTemplate(data));
 }
 
@@ -161,22 +165,15 @@ popupDeleteCard.setEventListeners();
 
 popupAvatarChange.setEventListeners();
 
-api.getInitialCards()
-  .then((data) => {
-    cardList.renderInitialItems(data);
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cards, data]) => {
+      userId = data._id;
+      profileTitle.textContent = data.name;
+      profileCaption.textContent = data.about;
+      profileAvatar.src = data.avatar;
+      cardList.renderInitialItems(cards);
   })
   .catch((error) => {
     console.log(error);
   });
-
-api.getUserInfo()
-  .then((data) => {
-    profileTitle.textContent = data.name;
-    profileCaption.textContent = data.about;
-    profileAvatar.src = data.avatar;
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
 
