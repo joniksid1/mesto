@@ -23,6 +23,20 @@ const profileAvatar = document.querySelector('.profile__image');
 
 const popupOpenButtonAdd = document.querySelector('.profile__add-button');
 
+// Конфиг с селекторами и классами для валидации форм
+
+export const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inputErrorSelector: '.popup__input-error_type_',
+  inputErrorFrameClass: 'popup__input_error-frame',
+};
+
+// Объект с экземплярами валидаторов всех форм
+
+export const formValidators = {}
+
 // // Данные стандартных карточек при загрузке
 
 // const initialCards = [

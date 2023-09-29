@@ -1,10 +1,7 @@
 import './index.css';
 import Card from '../components/Card.js';
-import {
-  validationConfig,
-  formValidators,
-  FormValidator
-} from '../components/FormValidator.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { validationConfig, formValidators } from "../utils/constants";
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -35,6 +32,7 @@ const createCard = (data, cardTemplate, handleCardClick) => {
       {
         handleDeleteCard: () => {
           popupDeleteCard.submitDeleteCard(cardElement);
+          formValidators['delete'].setButtonState(true);
         }
       },
       userId

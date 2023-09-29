@@ -1,17 +1,3 @@
-// Конфиг с селекторами и классами для валидации форм
-
-export const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inputErrorSelector: '.popup__input-error_type_',
-  inputErrorFrameClass: 'popup__input_error-frame',
-};
-
-// Объект с экземплярами валидаторов всех форм
-
-export const formValidators = {}
-
 export class FormValidator {
   constructor(validationConfig, form) {
     this._form = form;
@@ -43,7 +29,7 @@ export class FormValidator {
     input.classList.remove(this._inputErrorFrameClass);
   };
 
-  _setButtonState(isActive) {
+  setButtonState(isActive) {
     if (isActive) {
       this._buttonElement.removeAttribute('disabled');
     } else {
@@ -57,23 +43,23 @@ export class FormValidator {
 
   _setEventListeners() {
     this._form.addEventListener('submit', (evt) => {
-      this._setButtonState(false);
+      this.setButtonState(false);
       this._preventDefault(evt);
       });
       this._inputList.forEach((input) => {
         input.addEventListener('input', () => {
           this._checkInputValidity(input);
           if (this._form.checkValidity()) {
-            this._setButtonState(true);
+            this.setButtonState(true);
           } else {
-            this._setButtonState(false);
+            this.setButtonState(false);
           }
         });
       });
   };
 
   resetValidation() {
-    this._setButtonState(false);
+    this.setButtonState(false);
     this._inputList.forEach((input) => {
       this._hideInputError(input);
     });

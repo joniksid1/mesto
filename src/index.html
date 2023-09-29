@@ -85,11 +85,11 @@
     <div class="popup__container avatar-popup__container">
       <button class="popup__close-button avatar-popup__close-button" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__title avatar-popup__title">Обновить аватар</h2>
-      <form name="delete" class="popup__form avatar-popup__form" novalidate>
+      <form name="avatar" class="popup__form avatar-popup__form" novalidate>
         <div class="popup__form-wrapper">
           <input name="avatar-link" placeholder="Ссылка на картинку" type="url"
           id="avatar-link" class="popup__input popup__input_type_link" required>
-          <span class="popup__input-error popup__input-error_type_link" id="avatar-link-error"></span>
+          <span class="popup__input-error popup__input-error_type_avatar-link" id="avatar-link-error"></span>
         </div>
         <button class="popup__button avatar-popup__button" type="submit" disabled>Сохранить</button>
       </form>
