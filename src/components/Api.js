@@ -37,6 +37,17 @@ export default class Api {
     )
   }
 
+  changeAvatar (data) {
+    return this._getRequest(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data['avatar-link'],
+      }),
+      }
+    )
+  }
+
   getInitialCards () {
       return this._getRequest(`${this._url}/cards`, {
           method: 'GET',

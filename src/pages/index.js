@@ -84,8 +84,9 @@ const popupProfileEdit = new PopupWithForm( {
       })
       .catch((error) => {
         console.log(error);
-      });
-    popupProfileEdit.close();
+      }).finally(() => {
+        popupProfileEdit.close();
+      })
     }
   });
 
@@ -100,8 +101,9 @@ const popupCardAdd = new PopupWithForm( {
       })
       .catch((error) => {
         console.log(error);
-      });
-    popupCardAdd.close();
+      }).finally(() => {
+        popupCardAdd.close();
+      })
     }
 });
 
@@ -120,17 +122,27 @@ const popupDeleteCard = new PopupSubmit( {
       card.deleteCard();
     }).catch((error) => {
       console.log(error);
+    }).finally(() => {
+      popupDeleteCard.close();
     })
-    popupDeleteCard.close();
-    }
+  }
 });
 
 // Экземпляр поп-апа редактирования аватарки
 
-const popupAvatarChange = new PopupSubmit( {
+const popupAvatarChange = new PopupWithForm( {
   popupSelector: '.avatar-popup',
-  formSubmitter: () => {
-
+  formSubmitter: (data) => {
+    api.changeAvatar(data)
+      .then((data) => {
+        profileAvatar.src = data.avatar;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        popupAvatarChange.close();
+      })
   }
 });
 
