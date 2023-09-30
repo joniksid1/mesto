@@ -35,6 +35,26 @@ const createCard = (data, cardTemplate, handleCardClick) => {
           formValidators['delete'].setButtonState(true);
         }
       },
+      {
+        setLike: (id, likeCounter) => {
+          api.setlike(id).then((data) => {
+            likeCounter.textContent = data.likes.length;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+        }
+      },
+      {
+        deleteLike: (id, likeCounter) => {
+          api.removeLike(id).then((data) => {
+            likeCounter.textContent = data.likes.length;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+        }
+      },
       userId
     );
   cardElement.handleDeleteCheck();

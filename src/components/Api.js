@@ -4,18 +4,23 @@ export default class Api {
       this._headers = headers;
   }
 
-  _getRequest (url, options) {
-      return fetch(url, options)
+  _getRequest(url, options) {
+    return fetch(url, options)
       .then((response) => {
-          if(response.ok) {
-              return response.json()
-          }
-
-          throw new Error('Что-то пошло не так...')
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then((errorData) => {
+            const errorMessage = errorData.message || 'Request failed';
+            const errorWithStatus = new Error(errorMessage);
+            errorWithStatus.status = response.status;
+            throw errorWithStatus;
+          });
+        }
       })
       .catch((error) => {
-          console.log(error);
-      })
+        alert(`Статус ошибки: ${error.status}, Сообщение: ${error.message}`);
+      });
   }
 
   getUserInfo () {
@@ -68,5 +73,19 @@ export default class Api {
           method: 'DELETE',
           headers: this._headers
       })
+  }
+
+  setlike (id) {
+    return this._getRequest(`${this._url}/cards/${id}/likes`, {
+        method: 'PUT',
+        headers: this._headers,
+    })
+  }
+
+  removeLike (id) {
+    return this._getRequest(`${this._url}/cards/${id}/likes`, {
+        method: 'DELETE',
+        headers: this._headers,
+    })
   }
 }
