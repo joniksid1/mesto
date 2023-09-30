@@ -24,14 +24,12 @@ export default class Card {
     }
   }
 
-  _likeCard() {
+  likeCard() {
     this._likeButton.classList.add('elements__heart_active');
-    this._setLike(this._id, this._likeCounter);
   };
 
-  _removeLike() {
+  removeLike() {
     this._likeButton.classList.remove('elements__heart_active');
-    this._deleteLike(this._id, this._likeCounter);
   }
 
   _checkLike() {
@@ -49,8 +47,8 @@ export default class Card {
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
       if (this._likeButton.classList.contains('elements__heart_active')) {
-        this._removeLike();
-      } else this._likeCard();
+        this._deleteLike(this._id, this._likeCounter);
+      } else this._setLike(this._id, this._likeCounter);
     });
 
     this._deleteButton.addEventListener('click', (evt) => {

@@ -10,14 +10,10 @@ const cardTemplate = document.querySelector('.cards');
 // Переменные для редактирования профиля
 
 const popupOpenButtonEdit = document.querySelector('.profile__edit-button');
-const formElementEdit = document.forms['profile'];
-const nameInput = formElementEdit.querySelector('.popup__input_type_name');
-const jobInput = formElementEdit.querySelector('.popup__input_type_job');
 const profileTitleSelector = '.profile__title';
 const profileCaptionSelector = '.profile__caption';
-const profileTitle = document.querySelector(profileTitleSelector);
-const profileCaption = document.querySelector(profileCaptionSelector);
-const profileAvatar = document.querySelector('.profile__image');
+const avatarSelector = '.profile__image';
+const profileAvatar = document.querySelector(avatarSelector);
 
 // Переменные поп-апа добавление карточек
 
@@ -77,13 +73,10 @@ const apiOptions = {
 export {
   cardTemplate,
   popupOpenButtonEdit,
-  nameInput,
-  jobInput,
   profileTitleSelector,
   profileCaptionSelector,
+  avatarSelector,
   popupOpenButtonAdd,
   apiOptions,
-  profileTitle,
-  profileCaption,
   profileAvatar
 }

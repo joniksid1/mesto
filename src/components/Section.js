@@ -10,7 +10,7 @@ export default class Section {
   }
 
   renderInitialItems(items, handleDeleteCard) {
-    items.forEach((item) => {
+    items.reverse().forEach((item) => {
       this.renderer(item, handleDeleteCard);
     });
 

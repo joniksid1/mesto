@@ -18,9 +18,6 @@ export default class Api {
           });
         }
       })
-      .catch((error) => {
-        alert(`Статус ошибки: ${error.status}, Сообщение: ${error.message}`);
-      });
   }
 
   getUserInfo () {
