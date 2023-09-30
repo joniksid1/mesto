@@ -13,8 +13,8 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ nameInput, about }) {
-    this.profileTitle.textContent = nameInput;
+  setUserInfo({ name, about }) {
+    this.profileTitle.textContent = name;
     this.profileCaption.textContent = about;
   }
 

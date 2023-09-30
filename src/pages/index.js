@@ -98,6 +98,7 @@ const userInfo = new UserInfo({ nameSelector: profileTitleSelector, jobSelector:
 const popupProfileEdit = new PopupWithForm( {
   popupSelector: '.edit-popup',
   formSubmitter: (data) => {
+    popupProfileEdit.showLoader();
     api.setUserInfo(data)
       .then((data) => {
         userInfo.setUserInfo(data);
@@ -106,6 +107,7 @@ const popupProfileEdit = new PopupWithForm( {
         console.log(error);
       }).finally(() => {
         popupProfileEdit.close();
+        popupProfileEdit.removeLoader();
       })
     }
   });
@@ -115,6 +117,7 @@ const popupProfileEdit = new PopupWithForm( {
 const popupCardAdd = new PopupWithForm( {
   popupSelector: '.add-popup',
   formSubmitter: (data, ) => {
+    popupCardAdd.showLoader();
     api.createCard(data)
       .then((data) => {
         createCard(data, cardTemplate, handleCardClick);
@@ -123,6 +126,7 @@ const popupCardAdd = new PopupWithForm( {
         console.log(error);
       }).finally(() => {
         popupCardAdd.close();
+        popupCardAdd.removeLoader();
       })
     }
 });
@@ -153,6 +157,7 @@ const popupDeleteCard = new PopupSubmit( {
 const popupAvatarChange = new PopupWithForm( {
   popupSelector: '.avatar-popup',
   formSubmitter: (data) => {
+    popupAvatarChange.showLoader();
     api.changeAvatar(data)
       .then((data) => {
         profileAvatar.src = data.avatar;
@@ -162,6 +167,7 @@ const popupAvatarChange = new PopupWithForm( {
       })
       .finally(() => {
         popupAvatarChange.close();
+        popupAvatarChange.removeLoader();
       })
   }
 });
