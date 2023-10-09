@@ -120,6 +120,7 @@ const popupCardAdd = new PopupWithForm( {
     popupCardAdd.showLoader();
     api.createCard(data)
       .then((data) => {
+        console.log(data)
         createCard(data, cardTemplate, handleCardClick);
         popupCardAdd.close();
       })
